@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const sequelize = new Sequelize({
+export const database = new Sequelize({
   dialect: 'sqlite',
   storage: './database.sqlite',  // Arquivo do banco
   logging: process.env.NODE_ENV === 'development' ? console.log : false,
@@ -13,5 +13,3 @@ const sequelize = new Sequelize({
     freezeTableName: false // Pluraliza nomes (User → users)
   }
 });
-
-export default sequelize;
