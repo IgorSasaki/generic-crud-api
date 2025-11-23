@@ -24,28 +24,28 @@ export const makeReportController = () => {
     }
   };
 
-  const get = async (req, res, next) => {
+  const get = async (request, response, next) => {
     try {
-      return res.json(await service.get(req.params.id));
+      return response.json(await service.get({ id: request.params.id }));
     }
     catch (err) {
       return next(err);
     }
   };
 
-  const patch = async (req, res, next) => {
+  const patch = async (request, response, next) => {
     try {
-      return res.json(await service.patch(req.params.id, req.body));
+      return response.json(await service.update({ id: request.params.id, data: request.body }));
     }
     catch (err) {
       return next(err);
     }
   };
 
-  const remove = async (req, res, next) => {
+  const remove = async (request, response, next) => {
     try {
-      await service.remove(req.params.id);
-      return res.status(204).send();
+      await service.remove({ id: request.params.id });
+      return response.status(204).send();
     }
     catch (err) {
       return next(err);
