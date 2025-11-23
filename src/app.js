@@ -15,7 +15,7 @@ export const createApp = () => {
   app.use(rateLimit({ windowMs: 60_000, max: 100 })); // throttle básico
 
   // 2) Healthcheck
-  app.get('/health', (_req, res) => res.json({ ok: true }));
+  app.get('/health', (_request, response) => response.json({ ok: true }));
 
   // 3) Rotas
 

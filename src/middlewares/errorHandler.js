@@ -1,11 +1,11 @@
-export const errorHandler = (err, _req, res, _next) => {
-  const status = err?.status ?? 500;
+export const errorHandler = (error, _request, response, _next) => {
+  const status = error?.status ?? 500;
 
   const payload = {
-    message: err?.message ?? 'Internal server error',
-    code: err?.code ?? 'INTERNAL_ERROR',
-    details: err?.details ?? null
+    message: error?.message ?? 'Internal server error',
+    code: error?.code ?? 'INTERNAL_ERROR',
+    details: error?.details ?? null
   };
 
-  return res.status(status).json(payload);
+  return response.status(status).json(payload);
 };
