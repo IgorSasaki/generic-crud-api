@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createReport = z.object({
+export const createReportSchema = z.object({
   title: z.string().min(1, 'title is required'),
   content: z.string().min(1, 'content is required'),
   originLocation: z.string().min(1, 'originLocation is required'),
