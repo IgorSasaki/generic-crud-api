@@ -19,10 +19,10 @@ export const makeReportRepoSequelize = () => {
     async findAll({ q, page = 1, limit = 10, order = 'id', dir = 'ASC' }) {
       const where = {}
 
-      // Filtro por nome (busca parcial)
+      // Filtro por título (busca parcial)
       if (q) {
-        where.name = { [Op.like]: `%${q}%` };  // SQLite
-        // where.name = { [Op.iLike]: `%${q}%` };  // PostgreSQL (case-insensitive)
+        where.title = { [Op.like]: `%${q}%` };  // SQLite
+        // where.title = { [Op.iLike]: `%${q}%` };  // PostgreSQL (case-insensitive)
       }
 
       const offset = (page - 1) * limit;
@@ -31,7 +31,7 @@ export const makeReportRepoSequelize = () => {
         where,
         include: [{
           model: User,
-          as: 'creator',
+          as: 'user',
           attributes: ['id', 'name']
         }],
         limit,
