@@ -8,7 +8,7 @@ export const makeUserService = () => {
   const repo = makeUserRepoSequelize();
 
   const register = async ({ name, email, password }) => {
-    const exists = await repo.findByEmail(email);
+    const exists = await repo.findByEmail({ email });
 
     if (exists) {
       throw new HttpError('Email already in use', 409, 'EMAIL_TAKEN');
@@ -20,7 +20,7 @@ export const makeUserService = () => {
   };
 
   const login = async ({ email, password }) => {
-    const user = await repo.findByEmail(email);
+    const user = await repo.findByEmail({ email });
 
     if (!user) {
       throw new HttpError('Invalid credentials', 401, 'INVALID_CREDENTIALS');
