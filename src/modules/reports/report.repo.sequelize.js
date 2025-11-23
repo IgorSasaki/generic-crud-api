@@ -46,6 +46,22 @@ export const makeReportRepoSequelize = () => {
         total: count,
         totalPages: Math.ceil(count / limit)
       };
+    },
+
+    async update({ id, data }) {
+      const report = await Report.findByPk(id)
+      if (!report) return null
+
+      await report.update(data)
+      return report.toJSON()
+    },
+
+    async delete({ id }) {
+      const report = await Report.findByPk(id)
+      if (!report) return false
+
+      await report.destroy()
+      return true
     }
   }
 }
