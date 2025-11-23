@@ -8,13 +8,12 @@ export const reportRouter = () => {
   const r = Router()
   const ctrl = makeReportController()
 
-  r.use(ensureAuth)
 
-  r.post('/', validate({ body: createReportSchema }), ctrl.create)
+  r.post('/', ensureAuth, validate({ body: createReportSchema }), ctrl.create)
   r.get('/', validate({ query: listReportsQuery }), ctrl.list)
   r.get('/:id', validate({ params: reportIdParams }), ctrl.get)
-  r.patch('/:id', validate({ params: reportIdParams, body: patchReportSchema }), ctrl.patch)
-  r.delete('/:id', validate({ params: reportIdParams }), ctrl.remove)
+  r.patch('/:id', ensureAuth, validate({ params: reportIdParams, body: patchReportSchema }), ctrl.patch)
+  r.delete('/:id', ensureAuth, validate({ params: reportIdParams }), ctrl.remove)
 
   return r
 }
