@@ -2,7 +2,7 @@ import { Router } from "express"
 import { makeReportController } from "../modules/reports/report.controller.js"
 import { ensureAuth } from "../middlewares/auth.js"
 import { validate } from "../middlewares/validate.js"
-import { createReportSchema, listReportsQuery, patchReportSchema, reportIdParams } from "../modules/reports/report.schemas"
+import { createReportSchema, listReportsQuery, patchReportSchema, reportIdParams } from "../modules/reports/report.schemas.js"
 
 export const reportRouter = () => {
   const r = Router()
