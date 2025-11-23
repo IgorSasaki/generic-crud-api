@@ -4,7 +4,6 @@ const { v4: uuidv4 } = require('uuid')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    // Primeiro, buscar os IDs dos usuários existentes
     const users = await queryInterface.sequelize.query(
       'SELECT id FROM users;',
       { type: Sequelize.QueryTypes.SELECT }
