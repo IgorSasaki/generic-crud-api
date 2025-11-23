@@ -20,15 +20,15 @@ export const makeReportService = () => {
     return found
   }
 
-  const list = async ({ q, page = 1, limit = 10, order = 'id', dir = 'ASC' }) => {
-    if (!SORTABLE.includes(order)) order = 'id';
+  const list = async ({ q, page = 1, limit = 10, order = 'createdAt', dir = 'ASC' }) => {
+    if (!SORTABLE.includes(order)) order = 'createdAt';
     if (!DIR_OK.includes(String(dir).toUpperCase())) dir = 'ASC';
 
     return repo.findAll({ q, order, dir, page: Number(page), limit: Number(limit) });
   }
 
   const update = async ({ id, data }) => {
-    const updated = await repo.update(id, data);
+    const updated = await repo.update({ id, data });
 
     if (!updated) {
       throw new HttpError('Report not found', 404, 'NOT_FOUND');
@@ -38,7 +38,7 @@ export const makeReportService = () => {
   }
 
   const remove = async ({ id }) => {
-    const ok = await repo.remove(id);
+    const ok = await repo.delete({ id });
 
     if (!ok) {
       throw new HttpError('Report not found', 404, 'NOT_FOUND');
