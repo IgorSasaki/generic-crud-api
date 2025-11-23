@@ -4,6 +4,7 @@ import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { env } from './config/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import { authRouter } from './routes/auth.routes.js';
 
 export const createApp = () => {
   const app = express();
@@ -18,6 +19,7 @@ export const createApp = () => {
   app.get('/health', (_request, response) => response.json({ ok: true }));
 
   // 3) Rotas
+  app.use('/auth', authRouter());
 
   // 4) Error handler (sempre por último)
   app.use(errorHandler);
